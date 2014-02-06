@@ -2,6 +2,7 @@ package com.me.mygdxgame;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,7 @@ public class MyGdxGame implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	private Sprite sprite2;
 	int rotacion;
 	
 	@Override
@@ -31,10 +33,15 @@ public class MyGdxGame implements ApplicationListener {
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
 		
 		sprite = new Sprite(region);
+		sprite2 = new Sprite(region);
+		sprite2.draw(batch);
+		
+		sprite = new Sprite(region);
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(0,0);
 		sprite.setRotation(25);
+		
 	}
 
 	@Override
@@ -45,14 +52,18 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void render() {	
-		sprite.setRotation(rotacion);
-		rotacion++; 
+		if(Gdx.input.isTouched())
+			              
+		{
+			rotacion++;
+		}
 		Gdx.gl.glClearColor(0f, 0.5f, 0.75f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		sprite.draw(batch);
+		sprite2.draw(batch);
 		batch.end();
 	}
 
