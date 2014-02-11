@@ -17,6 +17,8 @@ public class MyGdxGame implements ApplicationListener {
 	private Texture texture;
 	private Sprite sprite;
 	private Sprite sprite2;
+	Texture texture_nave;
+	Sprite sprite_nave;
 	int rotacion;
 	
 	@Override
@@ -27,14 +29,18 @@ public class MyGdxGame implements ApplicationListener {
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
 		
+		texture_nave = new Texture(Gdx.files.internal("data/nave.png"));
+		sprite_nave = new Sprite(texture_nave,128,64);
+		sprite_nave.setPosition(-0.5f,-0.5f);
+		sprite_nave.setSize(0.5f,0.5f);
+		
+		
 		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
 		
 		sprite = new Sprite(region);
 		sprite2 = new Sprite(region);
-		sprite2.draw(batch);
 		
 		sprite = new Sprite(region);
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
@@ -48,6 +54,7 @@ public class MyGdxGame implements ApplicationListener {
 	public void dispose() {
 		batch.dispose();
 		texture.dispose();
+	
 	}
 
 	@Override
@@ -64,6 +71,7 @@ public class MyGdxGame implements ApplicationListener {
 		batch.begin();
 		sprite.draw(batch);
 		sprite2.draw(batch);
+		sprite_nave.draw(batch);
 		batch.end();
 	}
 
